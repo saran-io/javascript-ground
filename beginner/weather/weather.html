@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Weather App</title>
+</head>
+<body>
+  <h1>Weather App</h1>
+  <form>
+    <input type="text" id="city" placeholder="Enter a city">
+    <button type="submit">Get Weather</button>
+  </form>
+  <div id="weather"></div>
+  <script>
+    const form = document.querySelector('form');
+    const input = document.querySelector('#city');
+    const weatherDiv = document.querySelector('#weather');
+
+    // Add event listener to the form
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const city = input.value.trim();
+      if (city) {
+        // Fetch the weather data from the OpenWeatherMap API
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=7c088c0e1107a0f160dce87f1257dc3d&units=metric`)
+          .then(response => response.json())
+          .then(data => {
+            // Display the weather data in the weatherDiv
+            const weather = `
+              <h2>${data.name}</h2>
+              <p>Temperature: ${data.main.temp} °C</p>
+              <p>Humidity: ${data.main.humidity} %</p>
+              <p>Wind Speed: ${data.wind.speed} m/s</p>
+            `;
+            weatherDiv.innerHTML = weather;
+          })
+          .catch(error => {
+            // Display an error message if the API request fails
+            weatherDiv.innerHTML = '<p>Unable to fetch weather data</p>';
+          });
+        input.value = '';
+      }
+    });
+  </script>
+</body>
+</html>
