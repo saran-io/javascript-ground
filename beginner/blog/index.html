@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Blog Page</title>
+  <style>
+    .blog-post {
+      margin-bottom: 2em;
+    }
+    .blog-post h2 {
+      margin-bottom: 0.5em;
+    }
+  </style>
+</head>
+<body>
+  <h1>Simple Blog Page</h1>
+  <div id="blog"></div>
+  <script>
+    // Define some blog posts
+    const blogPosts = [
+      {
+        title: 'First Blog Post',
+        content: 'This is the first blog post.'
+      },
+      {
+        title: 'Second Blog Post',
+        content: 'This is the second blog post.'
+      },
+      {
+        title: 'Third Blog Post',
+        content: 'This is the third blog post.'
+      }
+    ];
+
+    // Get the blog div
+    const blogDiv = document.querySelector('#blog');
+
+    // Add the blog posts to the blog div
+    for (const post of blogPosts) {
+      const postDiv = document.createElement('div');
+      postDiv.className = 'blog-post';
+      const title = document.createElement('h2');
+      title.textContent = post.title;
+      const content = document.createElement('p');
+      content.textContent = post.content;
+      postDiv.appendChild(title);
+      postDiv.appendChild(content);
+      blogDiv.appendChild(postDiv);
+    }
+  </script>
+</body>
+</html>
